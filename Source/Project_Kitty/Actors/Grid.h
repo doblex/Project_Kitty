@@ -32,7 +32,16 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int Columns = 10;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int CellDimension = 1;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector OffsetUp = FVector(0.0f, 0.0f, 0.0f);
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector OffsetDown = FVector(0.0f, 0.0f, 0.0f);
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<ACell> CellActor;
 	

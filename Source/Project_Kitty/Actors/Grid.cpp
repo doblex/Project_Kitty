@@ -48,7 +48,7 @@ void AGrid::GenerateGrid()
 
         AArrow* NewDownArrow = GetWorld()->SpawnActor<AArrow>(
             ArrowCell,
-            GetActorLocation() + FVector(Row * 100.0f, 0.0f, -110.f),
+            GetActorLocation() + FVector(Row * CellDimension * 100.0f + OffsetDown.X, 0.0f + OffsetDown.Y, -100 * CellDimension + OffsetDown.Z),
             FRotator(-180, 0, 0),
             SpawnParams
             );
@@ -67,7 +67,7 @@ void AGrid::GenerateGrid()
         {
             ACell* NewCell = GetWorld()->SpawnActor<ACell>(
                 CellActor,
-                GetActorLocation() + FVector(Row * 100.0f, 0.0f, Column * 100.0f),
+                GetActorLocation() + FVector(Row * CellDimension * 100.0f, 0.0f, Column * CellDimension * 100.0f),
                 FRotator::ZeroRotator,
                 SpawnParams
             );
@@ -76,6 +76,8 @@ void AGrid::GenerateGrid()
             {
                 continue;
             }
+            
+            NewCell->SetActorScale3D(FVector(CellDimension));
 
             NewCell->AttachToActor(
                 this,
@@ -87,7 +89,7 @@ void AGrid::GenerateGrid()
         
         AArrow* NewUpArrow = GetWorld()->SpawnActor<AArrow>(
             ArrowCell,
-            GetActorLocation() + FVector(Row * 100.0f, 0.0f, Columns * 100 + 10.f),
+            GetActorLocation() + FVector(Row * CellDimension * 100.0f + OffsetUp.X, 0.0f + OffsetUp.Y, Columns * CellDimension * 100 + OffsetUp.Z),
             FRotator::ZeroRotator,
             SpawnParams
             );
