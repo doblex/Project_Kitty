@@ -11,6 +11,8 @@ class PROJECT_KITTY_API ACell : public AActor
 {
 	GENERATED_BODY()
 	
+protected:
+
 public:	
 	// Sets default values for this actor's properties
 	ACell();

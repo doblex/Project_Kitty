@@ -7,6 +7,20 @@
 #include "Cell.h"
 #include "Grid.generated.h"
 
+enum class EArrowDirection : uint8;
+class AArrow;
+
+
+USTRUCT(BlueprintType)
+struct FCellCol
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
+	TArray<ACell*> ColCells;
+};
+
+
 UCLASS()
 class PROJECT_KITTY_API AGrid : public AActor
 {
@@ -21,9 +35,16 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<ACell> CellActor;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AArrow> ArrowCell;
 
-private:
-	TArray<TArray<ACell*>> Cells;
+protected:
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TArray<FCellCol> Cells;
+	
+	UPROPERTY(BlueprintReadOnly, EditAnywhere)
+	TArray<AArrow*> Arrows;
 
 public:	
 	// Sets default values for this actor's properties
@@ -32,9 +53,20 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	void RotateUp();
+
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, CallInEditor)
+	void GenerateGrid();
+	
+	UFUNCTION(BlueprintCallable, CallInEditor)
+	void EmptyGrid();
+	
+	UFUNCTION(BlueprintCallable)
+	void RotateColumn(int index, EArrowDirection Direction);
 };
