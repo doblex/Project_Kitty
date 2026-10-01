@@ -122,6 +122,9 @@ void AGrid::EmptyGrid()
             Cells[i].ColCells[j]->Destroy();
         }
     }
+    
+    Arrows.Empty();
+    Cells.Empty();
 }
 
 void AGrid::RotateColumn(int index, EArrowDirection Direction)
